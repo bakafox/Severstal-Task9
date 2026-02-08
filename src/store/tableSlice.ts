@@ -1,18 +1,18 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { DataRow } from '../types'
+import type { DataRow, TableMapSortOptions } from '../types'
 import { createSlice } from '@reduxjs/toolkit'
 import getTableData from '../backend'
 
 interface TableState {
     tableMap: Record<number, DataRow[]>
     expanded: Record<number, boolean>
+    hideInactive: boolean
 }
-
-type TableMapSortOptions = 'id' | 'name' | 'email' | 'balance'
 
 const initialTableState: TableState = {
     tableMap: {},
     expanded: {},
+    hideInactive: false,
 }
 
 const tableSlice = createSlice({
@@ -35,6 +35,10 @@ const tableSlice = createSlice({
             })
         },
 
+        toggleInactive(state) {
+            state.hideInactive = !state.hideInactive
+        },
+
         toggle(state, action: { payload: number }) {
             state.expanded[action.payload] = !state.expanded[action.payload]
         },
@@ -47,7 +51,8 @@ const tableSlice = createSlice({
     },
 })
 
-export const { initTable, toggle, toggleAll } = tableSlice.actions
+export const { initTable, toggleInactive, toggle, toggleAll } = tableSlice.actions
+
 export default tableSlice.reducer
 
 export function createTableMap(sortBy: TableMapSortOptions, reverse: boolean) {

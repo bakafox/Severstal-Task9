@@ -4,7 +4,7 @@
         justify-content: center; align-items: center;
         height: 180px;
         background: linear-gradient(var(--accent-darker), var(--accent-dark)); color: var(--white);
-        padding-bottom: 42px;
+        padding-bottom: 56px;
     }
 }
 
@@ -12,7 +12,7 @@
     display: flex; flex-direction: row;
     justify-content: center;
     padding: 0 20px 40px; gap: 20px;
-    transform: translateY(-42px);
+    transform: translateY(-48px);
 
     & main {
         flex: 1;

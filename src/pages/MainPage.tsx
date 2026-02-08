@@ -3,8 +3,9 @@ import type { Dispatch, State } from '../store'
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import TableHead from '../components/TableHead'
 import TableRow from '../components/TableRow'
-import { createTableMap, toggleAll } from '../store/tableSlice'
+import { createTableMap, toggleAll, toggleInactive } from '../store/tableSlice'
 import styles from './MainPage.module.css'
 
 const MainPage: FC = () => {
@@ -29,7 +30,7 @@ const MainPage: FC = () => {
                 ? (
                         <div className={styles['table-wrap']}>
                             <main>
-                                {/* <TableHead /> */}
+                                <TableHead />
 
                                 {rows.map(row => (
                                     <TableRow key={row.id} data={row} />
@@ -37,17 +38,15 @@ const MainPage: FC = () => {
                             </main>
 
                             <aside>
-                                <button onClick={() => dispatch(createTableMap('id', true))} />
-                                <button onClick={() => dispatch(createTableMap('id', false))} />
-                                <button onClick={() => dispatch(createTableMap('name', true))} />
-                                <button onClick={() => dispatch(createTableMap('name', false))} />
-                                <button onClick={() => dispatch(createTableMap('email', true))} />
-                                <button onClick={() => dispatch(createTableMap('email', false))} />
-                                <button onClick={() => dispatch(createTableMap('balance', true))} />
-                                <button onClick={() => dispatch(createTableMap('balance', false))} />
-                                <button onClick={() => dispatch(toggleAll(true))} />
-                                <button onClick={() => dispatch(toggleAll(false))} />
-                                {/* <TiledButton /> */}
+                                <button onClick={() => dispatch(toggleAll(true))}>
+                                    Развернуть всё
+                                </button>
+                                <button onClick={() => dispatch(toggleAll(false))}>
+                                    Свернуть всё
+                                </button>
+                                <button onClick={() => dispatch(toggleInactive())}>
+                                    Переключить показ неактивных клиентов
+                                </button>
                             </aside>
                         </div>
                     )

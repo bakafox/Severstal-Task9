@@ -1,0 +1,28 @@
+.thead {
+    flex: 1;
+    display: flex; flex-direction: row;
+    height: 46px;
+    border-bottom: 2px solid var(--accent-lite);
+    padding: 0 8px 0 40px;
+}
+
+.thead button {
+    appearance: none;
+    display: flex;
+    justify-content: start; align-items: center;
+    gap: 4px;
+    padding: 0 0 0 8px;
+    border: none;
+    background-color: transparent; color: var(--accent);
+    font-weight: bold;
+    transition: var(--TR-slow);
+
+    &:hover {
+        background-color: color-mix(var(--grey), var(--whitish));
+    }
+
+    &[class~="selected"] {
+        background-color: var(--accent); color: var(--white);
+        transition: var(--TR-fast);
+    }
+}

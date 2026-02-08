@@ -11,3 +11,5 @@ export interface DataRow {
 //     hasChildren: boolean
 //     children: NestedRow[]
 // }
+
+export type TableMapSortOptions = 'id' | 'name' | 'email' | 'balance'

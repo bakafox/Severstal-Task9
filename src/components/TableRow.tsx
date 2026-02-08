@@ -17,6 +17,9 @@ const TableRow: FC<{
     const expanded = useSelector(
         (state: State) => state.table.expanded,
     )
+    const hideInactive = useSelector(
+        (state: State) => state.table.hideInactive,
+    )
 
     const children = tableMap[data.id] ?? []
     const isExpanded = expanded[data.id] ?? false
@@ -26,9 +29,12 @@ const TableRow: FC<{
     }
 
     return (
-        <div className={`${styles.trow} ${!data.isActive ? 'inactive' : ''}`}>
+        <div
+            className={`${styles.trow} ${!data.isActive ? 'inactive' : ''}`}
+            style={{ display: (!data.isActive && hideInactive ? 'none' : '') }}
+        >
             <div className={styles['trow-data']}>
-                <span style={{ width: 40 }}>
+                <span style={{ width: 32 }}>
                     {(children.length > 0) && (
                         !isExpanded
                             ? (
@@ -46,9 +52,9 @@ const TableRow: FC<{
                     )}
 
                 </span>
-                <b style={{ flex: 2 }}>{data.id}</b>
+                <b style={{ flex: 3 }}>{data.id}</b>
                 <p style={{ flex: 20 }}>{data.name}</p>
-                <p style={{ flex: 28 }}>{data.email}</p>
+                <p style={{ flex: 27 }}>{data.email}</p>
                 <p style={{ flex: 10 }}>{data.balance}</p>
             </div>
 

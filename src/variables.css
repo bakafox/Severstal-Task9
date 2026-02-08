@@ -39,6 +39,6 @@
     /* СВОЙСТВА */
     --BR-button: 999px;
 
-    --TR-big: .3s;
-    --TR-small: .15s;
+    --TR-slow: .3s;
+    --TR-fast: .15s;
 }
