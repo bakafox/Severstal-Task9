@@ -2,7 +2,7 @@
     flex: 1;
     display: flex; flex-direction: column;
     background-color: var(--white); color: var(--accent);
-    transition: var(--TR-slow);
+    transition: background-color var(--TR-slow);
 
     &:not(:last-child) {
         border-bottom: 1px solid var(--grey);
