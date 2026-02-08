@@ -1,8 +1,10 @@
 import type { FC } from 'react'
 import type { Dispatch, State } from '../store'
 
+import { CopyMinus, CopyPlus, Eye, EyeOff } from 'lucide-react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import AsideButton from '../components/AsideButton'
 import TableHead from '../components/TableHead'
 import TableRow from '../components/TableRow'
 import { createTableMap, toggleAll, toggleInactive } from '../store/tableSlice'
@@ -12,6 +14,9 @@ const MainPage: FC = () => {
     const dispatch: Dispatch = useDispatch()
     const tableMap = useSelector(
         (state: State) => state.table.tableMap,
+    )
+    const hideInactive = useSelector(
+        (state: State) => state.table.hideInactive,
     )
 
     const rows = tableMap[0] ?? []
@@ -23,7 +28,10 @@ const MainPage: FC = () => {
     return (
         <div className={styles['page-wrap']}>
             <header>
-                <h1>Сведения о клиентах</h1>
+                <h1>
+                    Сведения о
+                    <em> клиентах</em>
+                </h1>
             </header>
 
             {(rows.length > 0)
@@ -38,15 +46,38 @@ const MainPage: FC = () => {
                             </main>
 
                             <aside>
-                                <button onClick={() => dispatch(toggleAll(true))}>
+                                <AsideButton
+                                    onClick={() => dispatch(toggleInactive())}
+                                    isActive={!hideInactive}
+                                >
+                                    {!hideInactive
+                                        ? (
+                                                <>
+                                                    <Eye style={{ flexShrink: 0 }} />
+                                                    Отображать неактивных клиентов
+                                                </>
+                                            )
+                                        : (
+                                                <>
+                                                    <EyeOff style={{ flexShrink: 0 }} />
+                                                    Скрывать неактивных клиентов
+                                                </>
+                                            )}
+                                </AsideButton>
+
+                                <AsideButton
+                                    onClick={() => dispatch(toggleAll(true))}
+                                >
+                                    <CopyPlus style={{ flexShrink: 0 }} />
                                     Развернуть всё
-                                </button>
-                                <button onClick={() => dispatch(toggleAll(false))}>
+                                </AsideButton>
+
+                                <AsideButton
+                                    onClick={() => dispatch(toggleAll(false))}
+                                >
+                                    <CopyMinus style={{ flexShrink: 0 }} />
                                     Свернуть всё
-                                </button>
-                                <button onClick={() => dispatch(toggleInactive())}>
-                                    Переключить показ неактивных клиентов
-                                </button>
+                                </AsideButton>
                             </aside>
                         </div>
                     )

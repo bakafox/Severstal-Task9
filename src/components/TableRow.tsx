@@ -23,6 +23,14 @@ const TableRow: FC<{
 
     const children = tableMap[data.id] ?? []
     const isExpanded = expanded[data.id] ?? false
+    const isChildrenVisible = (
+        children.length > 0
+        && (
+            hideInactive
+                ? children.filter(child => child.isActive).length > 0
+                : true
+        )
+    )
 
     function toggleIsOpened() {
         dispatch(toggle(data.id))
@@ -35,7 +43,7 @@ const TableRow: FC<{
         >
             <div className={styles['trow-data']}>
                 <span style={{ width: 32 }}>
-                    {(children.length > 0) && (
+                    {isChildrenVisible && (
                         !isExpanded
                             ? (
                                     <PlusCircle
@@ -58,7 +66,7 @@ const TableRow: FC<{
                 <p style={{ flex: 10 }}>{data.balance}</p>
             </div>
 
-            {children.length > 0 && isExpanded && (
+            {isChildrenVisible && isExpanded && (
                 <div className={styles['trow-children']}>
                     {children.map((child: DataRow) => (
                         <TableRow key={child.id} data={child} />

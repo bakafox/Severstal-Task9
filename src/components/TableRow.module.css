@@ -2,6 +2,7 @@
     flex: 1;
     display: flex; flex-direction: column;
     background-color: var(--white); color: var(--accent);
+    transition: var(--TR-slow);
 
     &:not(:last-child) {
         border-bottom: 1px solid var(--grey);
@@ -9,6 +10,11 @@
 
     &[class~="inactive"] {
         background-color: color-mix(var(--grey), var(--whitish));
+    }
+
+    &:hover {
+        background-color: color-mix(var(--accent-lite), var(--whitish) 80%);
+        transition: 0ms;
     }
 }
 

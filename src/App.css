@@ -14,7 +14,6 @@ body, #root {
 h1, h2, p, span, button, input {
     font-family: var(--FONTS);
 }
-
 h1 {
     font-size: var(--FS-h1);
     margin: 0;
@@ -26,4 +25,9 @@ h2 {
 
 p, span, hr {
     margin: 0;
+}
+
+em {
+    font-style: normal;
+    color: var(--emphasis);
 }

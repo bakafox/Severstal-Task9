@@ -2,13 +2,11 @@ import type { FC } from 'react'
 import type { Dispatch } from '../store'
 import type { TableMapSortOptions } from '../types'
 
-import { ChevronDown, ChevronUp } from 'lucide-react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createTableMap } from '../store/tableSlice'
+import SortButton from './SortButton'
 import styles from './TableHead.module.css'
-
-type HeaderSortOption = [TableMapSortOptions, string, number]
 
 const TableHead: FC = () => {
     const dispatch: Dispatch = useDispatch()
@@ -30,7 +28,7 @@ const TableHead: FC = () => {
         )
     }
 
-    const headerOptions: HeaderSortOption[] = [
+    const headerOptions: [TableMapSortOptions, string, number][] = [
         ['id', 'ID', 3],
         ['name', 'Полное имя', 20],
         ['email', 'Электроннная почта', 27],
@@ -41,17 +39,14 @@ const TableHead: FC = () => {
         <div className={styles.thead}>
             {
                 headerOptions.map(option => (
-                    <button
+                    <SortButton
                         key={option[0]}
-                        className={sortOption === option[0] ? 'selected' : ''}
-                        style={{ flex: option[2] }}
+                        label={option[1]}
+                        flex={option[2]}
+                        isSelected={sortOption === option[0]}
+                        isReversed={sortReverse}
                         onClick={() => updateSortParams(option[0])}
-                    >
-                        {(sortOption !== option[0] || option[2] > 5) && option[1]}
-                        {sortOption === option[0] && (sortReverse
-                            ? (<ChevronUp />)
-                            : (<ChevronDown />))}
-                    </button>
+                    />
                 ))
             }
         </div>

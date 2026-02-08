@@ -1,0 +1,21 @@
+.sort-btn {
+    appearance: none;
+    display: flex;
+    justify-content: start; align-items: center;
+    gap: 4px;
+    padding: 0 0 0 8px;
+    border: none;
+    background-color: transparent; color: var(--accent);
+    font-weight: bold;
+    transition: var(--TR-slow);
+    cursor: pointer;
+
+    &:hover {
+        background-color: color-mix(var(--grey), var(--whitish));
+    }
+
+    &[class~="selected"] {
+        background-color: var(--accent); color: var(--white);
+        transition: var(--TR-fast);
+    }
+}
