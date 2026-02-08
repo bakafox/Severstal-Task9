@@ -8,7 +8,7 @@ body, #root {
     min-width: 100%; min-height: 100%;
     margin: 0; padding: 0;
     font-family: var(--FONTS); font-size: var(--FS-regular);
-    background: var(--white); color: var(--accent-dark);
+    background: var(--whitish); color: var(--accent-dark);
 }
 
 h1, h2, p, span, button, input {

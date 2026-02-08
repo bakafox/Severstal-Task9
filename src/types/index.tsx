@@ -9,5 +9,5 @@ export interface DataRow {
 
 export interface NestedRow extends Omit<DataRow, 'parentId'> {
     hasChildren: boolean
-    children: NestedRow[]
+    // children: NestedRow[]
 }

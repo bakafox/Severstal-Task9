@@ -1,19 +1,27 @@
 .page-wrap {
-
-
     & header {
         display: flex;
         justify-content: center; align-items: center;
-        height: 200px;
+        height: 180px;
         background: linear-gradient(var(--accent-darker), var(--accent-dark)); color: var(--white);
-        padding-bottom: 40px;
+        padding-bottom: 42px;
     }
 }
 
 .table-wrap {
+    display: flex; flex-direction: row;
+    justify-content: center;
+    padding: 0 20px 40px; gap: 20px;
+    transform: translateY(-42px);
 
-}
-
-.table {
-
+    & main {
+        flex: 1;
+        max-width: 880px;
+        background-color: var(--white);
+    }
+    
+    & aside {
+        display: flex; flex-direction: column;
+        gap: 20px;
+    }
 }
