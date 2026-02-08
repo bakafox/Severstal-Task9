@@ -13,7 +13,15 @@
 
 :root {
     /* ШРИФТ */
-    font-family: 'severstal', system-ui, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    --FONTS: 'severstal', system-ui, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    font-size: 14px; 
+
+    /* РАЗМЕРЫ ШРИФТА */
+    --FS-h1: 4.12rem;
+    --FS-h2: 2.06rem;
+    --FS-big: 1.14rem;
+    --FS-regular: 1rem;
+    --FS-small: 0.76rem;
 
     /* ЦВЕТА */
     --accent-darker: #021f45;
@@ -31,6 +39,6 @@
     /* СВОЙСТВА */
     --BR-button: 999px;
 
-    --TR-small: .15s;
     --TR-big: .3s;
+    --TR-small: .15s;
 }

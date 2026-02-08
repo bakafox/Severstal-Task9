@@ -1,0 +1,29 @@
+html {
+    display: flex;
+    width: 100%; height: 100%;
+}
+body, #root {
+    flex: 1;
+    display: flex; flex-direction: column;
+    min-width: 100%; min-height: 100%;
+    margin: 0; padding: 0;
+    font-family: var(--FONTS); font-size: var(--FS-regular);
+    background: var(--white); color: var(--accent-dark);
+}
+
+h1, h2, p, span, button, input {
+    font-family: var(--FONTS);
+}
+
+h1 {
+    font-size: var(--FS-h1);
+    margin: 0;
+}
+h2 {
+    font-size: var(--FS-h2);
+    margin: 0;
+}
+
+p, span, hr {
+    margin: 0;
+}
