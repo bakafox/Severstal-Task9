@@ -245,6 +245,6 @@ const tableData: DataRow[] = [
     },
 ]
 
-export async function getTableData(): Promise<DataRow[]> {
+export default async function getTableData(): Promise<DataRow[]> {
     return Promise.resolve(tableData)
 }

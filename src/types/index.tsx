@@ -7,7 +7,7 @@ export interface DataRow {
     email: string
 }
 
-export interface NestedRow extends Omit<DataRow, 'parentId'> {
-    hasChildren: boolean
-    // children: NestedRow[]
-}
+// export interface NestedRow extends Omit<DataRow, 'parentId'> {
+//     hasChildren: boolean
+//     children: NestedRow[]
+// }

@@ -1,21 +1,22 @@
 import type { FC } from 'react'
-import type { DataRow, NestedRow } from '../types'
+import type { Dispatch, State } from '../store'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import TableRow from '../components/TableRow'
-import { getRowChildren, initTableMap } from '../tableMap'
+import { createTableMap, toggleAll } from '../store/tableSlice'
 import styles from './MainPage.module.css'
 
 const MainPage: FC = () => {
-    const [nestedData, setNestedData] = useState<NestedRow[]>([])
+    const dispatch: Dispatch = useDispatch()
+    const tableMap = useSelector(
+        (state: State) => state.table.tableMap,
+    )
+
+    const rows = tableMap[0] ?? []
 
     useEffect(() => {
-        async function initNestedData() {
-            await initTableMap()
-            setNestedData(getRowChildren(0))
-        }
-
-        initNestedData()
+        dispatch(createTableMap('id', false))
     }, [])
 
     return (
@@ -24,21 +25,29 @@ const MainPage: FC = () => {
                 <h1>Сведения о клиентах</h1>
             </header>
 
-            {(nestedData.length > 0)
+            {(rows.length > 0)
                 ? (
                         <div className={styles['table-wrap']}>
                             <main>
                                 {/* <TableHead /> */}
 
-                                {nestedData.map(row => (
+                                {rows.map(row => (
                                     <TableRow key={row.id} data={row} />
                                 ))}
                             </main>
 
                             <aside>
-                                {/* <TiledButton />
-                            <TiledButton />
-                            <TiledButton /> */}
+                                <button onClick={() => dispatch(createTableMap('id', true))} />
+                                <button onClick={() => dispatch(createTableMap('id', false))} />
+                                <button onClick={() => dispatch(createTableMap('name', true))} />
+                                <button onClick={() => dispatch(createTableMap('name', false))} />
+                                <button onClick={() => dispatch(createTableMap('email', true))} />
+                                <button onClick={() => dispatch(createTableMap('email', false))} />
+                                <button onClick={() => dispatch(createTableMap('balance', true))} />
+                                <button onClick={() => dispatch(createTableMap('balance', false))} />
+                                <button onClick={() => dispatch(toggleAll(true))} />
+                                <button onClick={() => dispatch(toggleAll(false))} />
+                                {/* <TiledButton /> */}
                             </aside>
                         </div>
                     )

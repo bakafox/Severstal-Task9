@@ -1,39 +1,46 @@
 import type { FC } from 'react'
-import type { NestedRow } from '../types'
+import type { Dispatch, State } from '../store'
+import type { DataRow } from '../types'
 
 import { MinusCircle, PlusCircle } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { getRowChildren } from '../tableMap'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggle } from '../store/tableSlice'
 import styles from './TableRow.module.css'
 
 const TableRow: FC<{
-    data: NestedRow
+    data: DataRow
 }> = ({ data }) => {
-    const [children, setChildren] = useState<NestedRow[]>([])
-    const [isOpened, setIsOpened] = useState<boolean>(false)
+    const dispatch: Dispatch = useDispatch()
+    const tableMap = useSelector(
+        (state: State) => state.table.tableMap,
+    )
+    const expanded = useSelector(
+        (state: State) => state.table.expanded,
+    )
 
-    useEffect(() => {
-        if (data.hasChildren) {
-            setChildren(getRowChildren(data.id))
-        }
-    }, [])
+    const children = tableMap[data.id] ?? []
+    const isExpanded = expanded[data.id] ?? false
+
+    function toggleIsOpened() {
+        dispatch(toggle(data.id))
+    }
 
     return (
         <div className={`${styles.trow} ${!data.isActive ? 'inactive' : ''}`}>
             <div className={styles['trow-data']}>
                 <span style={{ width: 40 }}>
-                    {data.hasChildren && (
-                        !isOpened
+                    {(children.length > 0) && (
+                        !isExpanded
                             ? (
                                     <PlusCircle
                                         style={{ cursor: 'pointer', marginBottom: -3 }}
-                                        onClick={() => setIsOpened(true)}
+                                        onClick={() => toggleIsOpened()}
                                     />
                                 )
                             : (
                                     <MinusCircle
                                         style={{ cursor: 'pointer', marginBottom: -3 }}
-                                        onClick={() => setIsOpened(false)}
+                                        onClick={() => toggleIsOpened()}
                                     />
                                 )
                     )}
@@ -45,9 +52,9 @@ const TableRow: FC<{
                 <p style={{ flex: 10 }}>{data.balance}</p>
             </div>
 
-            {data.hasChildren && children.length > 0 && isOpened && (
+            {children.length > 0 && isExpanded && (
                 <div className={styles['trow-children']}>
-                    {children.map((child: NestedRow) => (
+                    {children.map((child: DataRow) => (
                         <TableRow key={child.id} data={child} />
                     ))}
                 </div>
