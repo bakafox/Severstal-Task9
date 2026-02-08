@@ -1,0 +1,36 @@
+/* Оформление взято с сайта https://severstal.com/rus/ */
+
+@font-face {
+    font-family: 'severstal';
+    src: url(../Grtsk-Peta-Regular.woff2) format('woff2');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'severstal';
+    src: url(../Grtsk-Peta-SemiBold.woff2) format('woff2');
+    font-weight: bold;
+}
+
+:root {
+    /* ШРИФТ */
+    font-family: 'severstal', system-ui, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+
+    /* ЦВЕТА */
+    --accent-darker: #021f45;
+    --accent-dark: #002f6c;
+    --accent: #08449c;
+    --accent-lite: #007aff;
+
+    --white: #fff;
+    --whitish: #f4f4f4;
+    --grey: #bbb;
+    --black: #111;
+
+    --emphasis: #f00;
+
+    /* СВОЙСТВА */
+    --BR-button: 999px;
+
+    --TR-small: .15s;
+    --TR-big: .3s;
+}
