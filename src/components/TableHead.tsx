@@ -1,16 +1,13 @@
 import type { FC } from 'react'
-import type { Dispatch } from '../store'
 import type { TableMapSortOptions } from '../types'
 
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { createTableMap } from '../store/tableSlice'
 import SortButton from './SortButton'
 import styles from './TableHead.module.css'
 
-const TableHead: FC = () => {
-    const dispatch: Dispatch = useDispatch()
-
+const TableHead: FC<{
+    onSortUpdated: (opt: TableMapSortOptions, rev: boolean) => void
+}> = ({ onSortUpdated }) => {
     const [sortOption, setSortOption] = useState<TableMapSortOptions>('id')
     const [sortReverse, setSortReverse] = useState<boolean>(false)
 
@@ -23,9 +20,7 @@ const TableHead: FC = () => {
             setSortReverse(false)
         }
 
-        dispatch(
-            createTableMap(newSortOption, sortOption === newSortOption ? !sortReverse : false),
-        )
+        onSortUpdated(newSortOption, sortOption === newSortOption ? !sortReverse : false)
     }
 
     const headerOptions: [TableMapSortOptions, string, number][] = [

@@ -7,10 +7,4 @@ export interface DataRow {
     email: string
 }
 
-// Использовался до переноса функциональности в Redux:
-// export interface NestedRow extends Omit<DataRow, 'parentId'> {
-//     hasChildren: boolean
-//     children: NestedRow[]
-// }
-
 export type TableMapSortOptions = 'id' | 'name' | 'email' | 'balance'
